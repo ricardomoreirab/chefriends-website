@@ -1,0 +1,11 @@
+name = "chefriends-website"
+compatibility_date = "2026-01-24"
+
+[pages]
+build_command = "npm run build"
+build_output_dir = "dist"
+
+# KV namespace for waitlist emails
+[[kv_namespaces]]
+binding = "WAITLIST"
+id = "1158feba68cf4ab494e0f77d51142eaa"
