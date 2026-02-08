@@ -1,5 +1,5 @@
 import { Link } from '@heroui/react'
-import logo from '../assets/logo.png'
+import PixelLogo from './PixelLogo'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -26,35 +26,35 @@ const Footer = () => {
   }
 
   const socialLinks = [
-    { icon: '𝕏', href: '#', label: 'Twitter' },
-    { icon: 'in', href: '#', label: 'LinkedIn' },
-    { icon: 'ig', href: '#', label: 'Instagram' },
-    { icon: 'fb', href: '#', label: 'Facebook' },
+    { icon: 'X', href: '#', label: 'Twitter' },
+    { icon: 'IN', href: '#', label: 'LinkedIn' },
+    { icon: 'IG', href: '#', label: 'Instagram' },
+    { icon: 'FB', href: '#', label: 'Facebook' },
   ]
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-deep border-t border-pixel-orange/10">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16">
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
           {/* Brand */}
           <div className="col-span-2">
             <div className="mb-4">
-              <img src={logo} alt="Chefriends" className="h-10 w-auto brightness-0 invert" />
+              <PixelLogo variant="full" size={3} />
             </div>
-            <p className="text-gray-400 mb-6 max-w-xs">
+            <p className="text-text-dim mb-6 max-w-xs text-sm leading-relaxed">
               Your AI chef friends, specialized in every cuisine. Free to chat, with optional live classes
               from real professional chefs.
             </p>
             {/* Social links */}
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <Link
                   key={social.label}
                   href={social.href}
-                  className="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+                  className="w-9 h-9 border border-pixel-orange/20 hover:border-pixel-orange/50 flex items-center justify-center text-text-dim hover:text-pixel-orange transition-colors"
                   aria-label={social.label}
                 >
-                  <span className="text-sm font-bold">{social.icon}</span>
+                  <span className="font-pixel text-[8px]">{social.icon}</span>
                 </Link>
               ))}
             </div>
@@ -63,13 +63,13 @@ const Footer = () => {
           {/* Links */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h4 className="font-semibold text-white mb-4">{category}</h4>
+              <h4 className="font-pixel text-[10px] text-pixel-orange mb-4 tracking-wider">{category.toUpperCase()}</h4>
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors text-sm"
+                      className="text-text-dim hover:text-text-bright transition-colors text-sm"
                     >
                       {link.label}
                     </Link>
@@ -81,17 +81,17 @@ const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400 text-sm">
-            © {currentYear} Chefriends. All rights reserved.
+        <div className="mt-12 pt-6 border-t border-pixel-orange/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-text-dim text-sm">
+            &copy; {currentYear} Chefriends. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 text-gray-400 text-sm">
-              <span>🌐</span>
-              <select className="bg-transparent border-none text-gray-400 text-sm focus:outline-none cursor-pointer">
+            <div className="flex items-center gap-2 text-text-dim text-sm">
+              <span className="font-pixel text-[8px] text-pixel-orange">EN</span>
+              <select className="bg-transparent border-none text-text-dim text-sm focus:outline-none cursor-pointer">
                 <option value="en">English</option>
-                <option value="es">Español</option>
-                <option value="ca">Català</option>
+                <option value="es">Espanol</option>
+                <option value="ca">Catala</option>
               </select>
             </div>
           </div>

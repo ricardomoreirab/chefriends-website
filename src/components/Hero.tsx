@@ -1,11 +1,16 @@
 import { Button, Link } from '@heroui/react'
 import { motion } from 'framer-motion'
+import PixelChef from './PixelChef'
 
 const Hero = () => {
   return (
-    <section className="gradient-hero min-h-screen flex items-center pt-20">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section className="gradient-hero-dark grid-bg min-h-screen flex items-center pt-20 relative overflow-hidden">
+      {/* Ambient glow decorations */}
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-pixel-orange/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-pixel-gold/5 rounded-full blur-3xl" />
+
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -17,46 +22,46 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 bg-[#FFF5F0] text-[#FF6B35] px-4 py-2 rounded-full text-sm font-medium mb-6"
+              className="inline-flex items-center gap-2 bg-pixel-orange/10 text-pixel-orange px-4 py-2 text-xs font-pixel mb-8 pixel-border-subtle"
             >
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF6B35] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF6B35]"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pixel-orange opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-pixel-orange"></span>
               </span>
-              <span>Coming Soon</span>
+              <span>COMING SOON</span>
             </motion.div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+            <h1 className="font-pixel text-2xl sm:text-3xl lg:text-4xl text-text-bright leading-relaxed mb-8">
               Your Personal{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B35] to-[#F7931E]">
+              <span className="text-pixel-orange glow-orange block mt-2">
                 AI Chef Friends
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0">
-              Meet AI chefs specialized in every cuisine — from Pepe, your Italian home cook, to Yuki, your sushi master.
-              Get recipes, tips, and step-by-step guidance whenever you need it.
+            <p className="text-lg sm:text-xl text-text-dim mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              Meet AI chefs specialized in every cuisine — from Pepe, your Italian home cook,
+              to Yuki, your sushi master. Get recipes, tips, and step-by-step guidance.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button
                 as={Link}
                 href="#coming-soon"
-                className="bg-gradient-to-r from-[#FF6B35] to-[#F7931E] text-white font-semibold text-lg px-8"
-                radius="full"
+                className="bg-pixel-orange text-deep font-bold px-8 font-pixel text-xs tracking-wider"
+                radius="none"
                 size="lg"
               >
-                Join the Waitlist
+                JOIN WAITLIST
               </Button>
               <Button
                 as={Link}
                 href="#meet-the-chefs"
                 variant="bordered"
-                className="border-2 border-gray-300 text-gray-700 font-semibold text-lg px-8 hover:border-[#FF6B35] hover:text-[#FF6B35]"
-                radius="full"
+                className="border-2 border-pixel-orange/40 text-pixel-orange font-bold px-8 hover:bg-pixel-orange/10 font-pixel text-xs tracking-wider"
+                radius="none"
                 size="lg"
               >
-                Meet the Chefs
+                MEET CHEFS
               </Button>
             </div>
 
@@ -65,156 +70,119 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="mt-12 flex flex-wrap gap-6 justify-center lg:justify-start"
+              className="mt-12 flex flex-wrap gap-8 justify-center lg:justify-start"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-[#FFF5F0] rounded-full flex items-center justify-center">
-                  <span className="text-lg">🤖</span>
+                <div className="w-10 h-10 bg-pixel-green/10 border border-pixel-green/30 flex items-center justify-center">
+                  <span className="text-pixel-green font-pixel text-xs">AI</span>
                 </div>
                 <div className="text-left">
-                  <p className="text-sm font-medium text-gray-900">Free AI Chefs</p>
-                  <p className="text-xs text-gray-500">Chat anytime</p>
+                  <p className="text-sm font-semibold text-text-bright">Free AI Chefs</p>
+                  <p className="text-xs text-text-dim">Chat anytime</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-[#FFF8E6] rounded-full flex items-center justify-center">
-                  <span className="text-lg">👨‍🍳</span>
+                <div className="w-10 h-10 bg-pixel-gold/10 border border-pixel-gold/30 flex items-center justify-center">
+                  <span className="text-pixel-gold font-pixel text-[8px]">PRO</span>
                 </div>
                 <div className="text-left">
-                  <p className="text-sm font-medium text-gray-900">Live Classes</p>
-                  <p className="text-xs text-gray-500">With real chefs</p>
+                  <p className="text-sm font-semibold text-text-bright">Live Classes</p>
+                  <p className="text-xs text-text-dim">With real chefs</p>
                 </div>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Right Content - Phone Mockup */}
+          {/* Right Content - Retro Terminal Mockup */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
             className="relative flex justify-center"
           >
             <div className="relative">
-              {/* Background decorations */}
-              <div className="absolute -top-10 -left-10 w-72 h-72 bg-[#FFD4BF] rounded-full opacity-30 blur-3xl" />
-              <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-[#FFE299] rounded-full opacity-30 blur-3xl" />
-
-              {/* Phone mockup */}
+              {/* Terminal device frame */}
               <div className="relative z-10 animate-float">
-                <div className="w-72 h-[580px] bg-gray-900 rounded-[3rem] p-3 shadow-2xl">
-                  <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
-                    {/* Phone notch */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-gray-900 rounded-b-2xl z-10" />
+                <div className="w-80 pixel-border bg-deep p-1 glow-box-orange">
+                  {/* Terminal title bar */}
+                  <div className="bg-pixel-orange/20 px-3 py-2 flex items-center gap-2 border-b border-pixel-orange/30">
+                    <div className="flex gap-1.5">
+                      <div className="w-2.5 h-2.5 bg-pixel-red" />
+                      <div className="w-2.5 h-2.5 bg-pixel-gold" />
+                      <div className="w-2.5 h-2.5 bg-pixel-green" />
+                    </div>
+                    <span className="font-pixel text-[8px] text-pixel-orange ml-2">chefriends.app</span>
+                  </div>
 
-                    {/* App content mockup - AI Chat */}
-                    <div className="h-full pt-10 px-4 pb-4 bg-gradient-to-b from-[#FFF5F0] to-white flex flex-col">
-                      {/* Status bar */}
-                      <div className="flex justify-between items-center mb-4 px-2">
-                        <span className="text-xs font-medium text-gray-800">9:41</span>
-                        <div className="flex gap-1">
-                          <div className="w-4 h-2 bg-gray-800 rounded-sm" />
-                          <div className="w-4 h-2 bg-gray-800 rounded-sm" />
-                          <div className="w-6 h-3 bg-gray-800 rounded-sm" />
-                        </div>
+                  {/* Terminal screen */}
+                  <div className="crt-screen bg-[#0d1117] p-4 min-h-[420px] flex flex-col">
+                    {/* Chat header */}
+                    <div className="flex items-center gap-3 mb-4 pb-3 border-b border-pixel-orange/20">
+                      <div className="animate-pixel-bounce">
+                        <PixelChef chef="pepe" size={5} />
+                      </div>
+                      <div>
+                        <p className="font-pixel text-[10px] text-pixel-orange">PEPE</p>
+                        <p className="text-xs text-pixel-green flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 bg-pixel-green inline-block" />
+                          Online
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Chat messages */}
+                    <div className="flex-1 space-y-3 relative z-10">
+                      {/* AI message */}
+                      <div className="flex gap-2">
+                        <span className="text-pixel-orange font-pixel text-[8px] mt-1 flex-shrink-0">&gt;</span>
+                        <p className="text-sm text-text-bright">
+                          Ciao! I'm Pepe, your Italian home cook. What shall we make today?
+                        </p>
                       </div>
 
-                      {/* Chat header - Pepe */}
-                      <div className="flex items-center gap-3 mb-4 pb-3 border-b border-gray-100">
-                        <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                          <span className="text-xl">🇮🇹</span>
-                        </div>
-                        <div>
-                          <h3 className="text-sm font-bold text-gray-900">Pepe</h3>
-                          <p className="text-xs text-green-500">Online</p>
-                        </div>
+                      {/* User message */}
+                      <div className="bg-pixel-orange/10 border-l-2 border-pixel-orange px-3 py-2">
+                        <p className="text-sm text-pixel-orange">
+                          How do I make a perfect carbonara?
+                        </p>
                       </div>
 
-                      {/* Chat messages */}
-                      <div className="flex-1 space-y-3 overflow-hidden">
-                        {/* AI message */}
-                        <div className="flex gap-2">
-                          <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                            <span className="text-xs">🇮🇹</span>
-                          </div>
-                          <div className="bg-gray-100 rounded-2xl rounded-tl-sm px-3 py-2 max-w-[85%]">
-                            <p className="text-xs text-gray-800">Ciao! I'm Pepe, your Italian home cook. What shall we make today? 🍝</p>
-                          </div>
-                        </div>
-
-                        {/* User message */}
-                        <div className="flex justify-end">
-                          <div className="bg-gradient-to-r from-[#FF6B35] to-[#F7931E] rounded-2xl rounded-tr-sm px-3 py-2 max-w-[80%]">
-                            <p className="text-xs text-white">How do I make a perfect carbonara?</p>
-                          </div>
-                        </div>
-
-                        {/* AI response */}
-                        <div className="flex gap-2">
-                          <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                            <span className="text-xs">🇮🇹</span>
-                          </div>
-                          <div className="bg-gray-100 rounded-2xl rounded-tl-sm px-3 py-2 max-w-[85%]">
-                            <p className="text-xs text-gray-800">Ah, carbonara! The secret is using guanciale, not bacon. Let me walk you through it step by step...</p>
-                          </div>
-                        </div>
-
-                        {/* Recipe card */}
-                        <div className="ml-8 bg-white rounded-xl p-2 shadow-sm border border-gray-100">
-                          <div className="w-full h-16 bg-gradient-to-br from-[#FFF5F0] to-[#FFF8E6] rounded-lg mb-2 flex items-center justify-center">
-                            <span className="text-2xl">🍝</span>
-                          </div>
-                          <h4 className="font-semibold text-xs text-gray-900">Classic Carbonara</h4>
-                          <p className="text-[10px] text-gray-500">4 ingredients · 20 min</p>
-                        </div>
+                      {/* AI response */}
+                      <div className="flex gap-2">
+                        <span className="text-pixel-orange font-pixel text-[8px] mt-1 flex-shrink-0">&gt;</span>
+                        <p className="text-sm text-text-bright">
+                          Ah, carbonara! The secret is using guanciale, not bacon. Let me walk you through it...
+                        </p>
                       </div>
 
-                      {/* Chat input */}
-                      <div className="bg-gray-100 rounded-full px-4 py-2 flex items-center gap-2 mt-2">
-                        <span className="text-gray-400 text-xs flex-1">Ask Pepe anything...</span>
-                        <div className="w-6 h-6 bg-gradient-to-r from-[#FF6B35] to-[#F7931E] rounded-full flex items-center justify-center">
-                          <span className="text-white text-xs">↑</span>
+                      {/* Recipe card */}
+                      <div className="bg-card/50 border border-pixel-orange/20 p-3 ml-4">
+                        <div className="flex items-center gap-3">
+                          <span className="font-pixel text-[10px] text-pixel-gold">RECIPE</span>
+                          <div className="h-px flex-1 bg-pixel-orange/20" />
+                        </div>
+                        <p className="text-text-bright font-semibold text-sm mt-2">Classic Carbonara</p>
+                        <p className="text-text-dim text-xs mt-1">4 ingredients &middot; 20 min &middot; Easy</p>
+                        <div className="flex gap-2 mt-2">
+                          {['Guanciale', 'Eggs', 'Pecorino', 'Pepper'].map(i => (
+                            <span key={i} className="text-[10px] px-1.5 py-0.5 bg-pixel-orange/10 text-pixel-orange border border-pixel-orange/20">
+                              {i}
+                            </span>
+                          ))}
                         </div>
                       </div>
+                    </div>
+
+                    {/* Input prompt */}
+                    <div className="flex items-center gap-2 mt-3 pt-3 border-t border-pixel-orange/20 relative z-10">
+                      <span className="text-pixel-green font-pixel text-[10px]">$</span>
+                      <span className="text-text-dim text-sm flex-1">Ask Pepe anything...</span>
+                      <span className="w-2 h-4 bg-pixel-orange animate-blink" />
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Floating elements */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1 }}
-                className="absolute -left-8 top-20 bg-white rounded-2xl p-4 shadow-xl animate-float-delayed z-20"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-                    <span className="text-xl">🇯🇵</span>
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-gray-900">Yuki is online</p>
-                    <p className="text-xs text-gray-500">Sushi master</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1.2 }}
-                className="absolute -right-4 bottom-32 bg-white rounded-2xl p-4 shadow-xl animate-float z-20"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#FFF8E6] rounded-full flex items-center justify-center">
-                    <span className="text-xl">🎥</span>
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-gray-900">Live class at 7pm</p>
-                    <p className="text-xs text-gray-500">Chef Maria · Pasta</p>
-                  </div>
-                </div>
-              </motion.div>
             </div>
           </motion.div>
         </div>

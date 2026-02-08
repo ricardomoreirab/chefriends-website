@@ -1,6 +1,8 @@
 import { Button, Input } from '@heroui/react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import PixelChef from './PixelChef'
+import type { ChefId } from './PixelChef'
 
 const ComingSoon = () => {
   const [email, setEmail] = useState('')
@@ -37,15 +39,17 @@ const ComingSoon = () => {
     }
   }
 
+  const miniChefs: ChefId[] = ['pepe', 'yuki', 'carmen', 'priya', 'jacques', 'somchai']
+
   return (
-    <section id="coming-soon" className="py-24 bg-white relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 gradient-hero opacity-50" />
-      <div className="absolute top-0 left-0 w-96 h-96 bg-[#FFD4BF] rounded-full opacity-20 blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#FFE299] rounded-full opacity-20 blur-3xl translate-x-1/2 translate-y-1/2" />
+    <section id="coming-soon" className="py-24 bg-deep relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 grid-bg opacity-50" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-pixel-orange/3 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pixel-gold/3 rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
-        <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-[2.5rem] p-10 sm:p-14 lg:p-20 shadow-2xl">
+        <div className="bg-card/30 pixel-border p-8 sm:p-12 lg:p-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Content */}
             <motion.div
@@ -54,169 +58,144 @@ const ComingSoon = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 bg-[#FF6B35]/20 text-[#FF8C57] px-4 py-2 rounded-full text-sm font-medium mb-6">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF6B35] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-[#FF6B35]"></span>
+              <div className="inline-flex items-center gap-2 bg-pixel-orange/10 text-pixel-orange px-4 py-2 font-pixel text-[8px] mb-8 pixel-border-subtle">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pixel-orange opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-pixel-orange"></span>
                 </span>
-                <span>Coming Soon</span>
+                <span>COMING SOON</span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+              <h2 className="font-pixel text-lg sm:text-xl lg:text-2xl text-text-bright mb-6 leading-relaxed">
                 Be the First to{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8C57] to-[#FFC533]">
+                <span className="text-pixel-gold glow-gold block mt-2">
                   Meet Your Chef Friends
                 </span>
               </h2>
-              <p className="text-lg text-gray-300 mb-8">
+              <p className="text-lg text-text-dim mb-8 leading-relaxed">
                 We're bringing AI chef friends and live cooking classes together in one app.
-                Join the waitlist to get early access and be the first to cook with your new friends.
+                Join the waitlist to get early access.
               </p>
 
               {/* Email signup form */}
               {!isSubmitted ? (
-                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
+                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
                   <Input
                     type="email"
                     placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     classNames={{
-                      input: "bg-white/10 text-white placeholder:text-gray-400",
-                      inputWrapper: "bg-white/10 border-white/20 hover:bg-white/15 h-14",
+                      input: "bg-deep/50 text-text-bright placeholder:text-text-dim",
+                      inputWrapper: "bg-deep/50 border-pixel-orange/30 hover:bg-deep/70 h-12 rounded-none",
                     }}
-                    radius="lg"
+                    radius="none"
                     size="lg"
                     required
                     isDisabled={isLoading}
                   />
                   <Button
                     type="submit"
-                    className="bg-gradient-to-r from-[#FF6B35] to-[#F7931E] text-white font-semibold h-14 px-8"
-                    radius="lg"
+                    className="bg-pixel-orange text-deep font-bold h-12 px-8 font-pixel text-[10px] tracking-wider"
+                    radius="none"
                     size="lg"
                     isLoading={isLoading}
                     isDisabled={isLoading}
                   >
-                    Join Waitlist
+                    JOIN
                   </Button>
                 </form>
               ) : (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-green-500/20 border border-green-500/30 rounded-2xl p-6"
+                  className="bg-pixel-green/10 border border-pixel-green/30 p-5"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-lg">✓</span>
-                    </div>
+                    <span className="font-pixel text-xs text-pixel-green">OK</span>
                     <div>
-                      <p className="text-white font-semibold">You're on the list!</p>
-                      <p className="text-gray-400 text-sm">We'll notify you when Chefriends launches.</p>
+                      <p className="text-text-bright font-semibold">You're on the list!</p>
+                      <p className="text-text-dim text-sm">We'll notify you when Chefriends launches.</p>
                     </div>
                   </div>
                 </motion.div>
               )}
               {error && (
-                <p className="text-red-400 text-sm mt-3">{error}</p>
+                <p className="text-pixel-red text-sm mt-3">{error}</p>
               )}
 
               {/* Coming soon info */}
-              <div className="flex items-center gap-8 mt-8 pt-8 border-t border-gray-700">
+              <div className="flex items-center gap-8 mt-8 pt-6 border-t border-pixel-orange/10">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
-                    <span className="text-xl">📱</span>
+                  <div className="w-8 h-8 border border-pixel-blue/30 flex items-center justify-center">
+                    <span className="font-pixel text-[8px] text-pixel-blue">AP</span>
                   </div>
                   <div>
-                    <p className="text-white font-medium text-sm">iOS & Android</p>
-                    <p className="text-gray-500 text-xs">Coming to both platforms</p>
+                    <p className="text-text-bright text-sm font-medium">iOS & Android</p>
+                    <p className="text-text-dim text-xs">Both platforms</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
-                    <span className="text-xl">🚀</span>
+                  <div className="w-8 h-8 border border-pixel-green/30 flex items-center justify-center">
+                    <span className="font-pixel text-[8px] text-pixel-green">GO</span>
                   </div>
                   <div>
-                    <p className="text-white font-medium text-sm">Early 2026</p>
-                    <p className="text-gray-500 text-xs">Expected launch</p>
+                    <p className="text-text-bright text-sm font-medium">Early 2026</p>
+                    <p className="text-text-dim text-xs">Expected launch</p>
                   </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Phone mockup */}
+            {/* Chef parade */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="hidden lg:flex justify-center"
+              className="hidden lg:block"
             >
-              <div className="relative">
-                {/* Phone 1 - Chef selection */}
-                <div className="w-56 h-[450px] bg-gray-700 rounded-[2.5rem] p-2 shadow-2xl transform -rotate-6 translate-x-8">
-                  <div className="w-full h-full bg-white rounded-[2rem] overflow-hidden">
-                    <div className="h-full bg-gradient-to-b from-[#FFF5F0] to-white p-4">
-                      <div className="text-center mt-8">
-                        <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-[#FF6B35] to-[#F7931E] rounded-2xl flex items-center justify-center">
-                          <span className="text-3xl">🍳</span>
-                        </div>
-                        <h4 className="font-bold text-gray-900 mb-1">Choose Your Chef</h4>
-                        <p className="text-xs text-gray-500 mb-4">Pick a cuisine to explore</p>
-                        {/* Mini chef cards */}
-                        <div className="space-y-2">
-                          {[
-                            { flag: '🇮🇹', name: 'Pepe', cuisine: 'Italian' },
-                            { flag: '🇯🇵', name: 'Yuki', cuisine: 'Japanese' },
-                            { flag: '🇲🇽', name: 'Carmen', cuisine: 'Mexican' },
-                          ].map((chef) => (
-                            <div key={chef.name} className="flex items-center gap-2 bg-gray-50 rounded-xl p-2">
-                              <span className="text-lg">{chef.flag}</span>
-                              <div className="text-left">
-                                <p className="text-xs font-semibold text-gray-900">{chef.name}</p>
-                                <p className="text-[10px] text-gray-500">{chef.cuisine}</p>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <div className="bg-deep/50 border border-pixel-orange/10 p-8">
+                {/* Header */}
+                <div className="flex items-center gap-3 mb-6 pb-4 border-b border-pixel-orange/10">
+                  <span className="font-pixel text-[10px] text-pixel-orange">CHEF ROSTER</span>
+                  <div className="h-px flex-1 bg-pixel-orange/10" />
+                  <span className="font-pixel text-[8px] text-text-dim">6/6</span>
                 </div>
 
-                {/* Phone 2 (front) - Live class */}
-                <div className="absolute top-4 left-0 w-56 h-[450px] bg-gray-900 rounded-[2.5rem] p-2 shadow-2xl transform rotate-6 -translate-x-8 z-10">
-                  <div className="w-full h-full bg-white rounded-[2rem] overflow-hidden relative">
-                    {/* Notch */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-gray-900 rounded-b-xl z-10" />
+                {/* Chef grid */}
+                <div className="grid grid-cols-3 gap-6">
+                  {miniChefs.map((chefId, i) => (
+                    <motion.div
+                      key={chefId}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 * i }}
+                      className="flex flex-col items-center gap-2"
+                    >
+                      <div className="animate-pixel-bounce" style={{ animationDelay: `${i * 0.3}s` }}>
+                        <PixelChef chef={chefId} size={6} />
+                      </div>
+                      <span className="font-pixel text-[8px] text-text-dim uppercase">{chefId}</span>
+                    </motion.div>
+                  ))}
+                </div>
 
-                    <div className="h-full bg-gradient-to-b from-[#FFF5F0] to-white p-4 pt-8">
-                      {/* Live class header */}
-                      <div className="mb-3">
-                        <div className="flex items-center gap-1 mb-1">
-                          <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-                          <span className="text-[10px] text-red-500 font-semibold">LIVE</span>
-                        </div>
-                        <h4 className="font-bold text-gray-900 text-sm">Pasta Masterclass</h4>
-                        <p className="text-xs text-gray-500">with Chef Maria</p>
-                      </div>
-                      {/* Video placeholder */}
-                      <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl h-28 mb-3 flex items-center justify-center">
-                        <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                          <span className="text-white text-lg ml-0.5">▶</span>
-                        </div>
-                      </div>
-                      {/* Chat preview */}
-                      <div className="space-y-1.5">
-                        <div className="bg-gray-100 rounded-lg px-2 py-1">
-                          <p className="text-[10px] text-gray-600"><span className="font-semibold">Anna:</span> How much flour?</p>
-                        </div>
-                        <div className="bg-gray-100 rounded-lg px-2 py-1">
-                          <p className="text-[10px] text-gray-600"><span className="font-semibold">Chef:</span> 400g for 4 servings!</p>
-                        </div>
-                      </div>
-                    </div>
+                {/* Loading bar */}
+                <div className="mt-6 pt-4 border-t border-pixel-orange/10">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-pixel text-[8px] text-text-dim">LOADING...</span>
+                    <span className="font-pixel text-[8px] text-pixel-orange">87%</span>
+                  </div>
+                  <div className="h-2 bg-deep border border-pixel-orange/20">
+                    <motion.div
+                      className="h-full bg-pixel-orange"
+                      initial={{ width: '0%' }}
+                      whileInView={{ width: '87%' }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 2, delay: 0.5 }}
+                    />
                   </div>
                 </div>
               </div>
