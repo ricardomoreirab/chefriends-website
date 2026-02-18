@@ -1,6 +1,7 @@
 import { Button, Input } from '@heroui/react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { useI18n } from '../i18n'
 
 const chefColors = [
   { name: 'Pepe', color: '#E85D2C', letter: 'P' },
@@ -18,6 +19,7 @@ const ComingSoon = () => {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+  const { t } = useI18n()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -39,10 +41,10 @@ const ComingSoon = () => {
         setIsSubmitted(true)
         setEmail('')
       } else {
-        setError(data.error || 'Something went wrong. Please try again.')
+        setError(data.error || t('comingSoon.error.default'))
       }
     } catch {
-      setError('Unable to connect. Please try again later.')
+      setError(t('comingSoon.error.connection'))
     } finally {
       setIsLoading(false)
     }
@@ -50,14 +52,12 @@ const ComingSoon = () => {
 
   return (
     <section id="coming-soon" className="py-24 bg-cream relative overflow-hidden">
-      {/* Decorative blobs */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-chef-jacques/5 rounded-full blur-3xl" />
 
       <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
         <div className="bg-card-white rounded-3xl border border-border shadow-warm p-8 sm:p-12 lg:p-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Content */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -69,24 +69,22 @@ const ComingSoon = () => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-dark"></span>
                 </span>
-                <span>Coming soon</span>
+                <span>{t('comingSoon.badge')}</span>
               </div>
 
               <h2 className="font-serif text-3xl sm:text-4xl text-forest mb-4 leading-tight">
-                Be the first to{' '}
-                <span className="italic">meet your chef friends</span>
+                {t('comingSoon.title')}{' '}
+                <span className="italic">{t('comingSoon.titleHighlight')}</span>
               </h2>
               <p className="text-lg text-forest-light mb-8 leading-relaxed">
-                Join the waitlist and we'll let you know when Chefriends
-                is ready. Available on iOS first.
+                {t('comingSoon.subtitle')}
               </p>
 
-              {/* Email signup form */}
               {!isSubmitted ? (
                 <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
                   <Input
                     type="email"
-                    placeholder="Enter your email"
+                    placeholder={t('comingSoon.emailPlaceholder')}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     classNames={{
@@ -105,7 +103,7 @@ const ComingSoon = () => {
                     isLoading={isLoading}
                     isDisabled={isLoading}
                   >
-                    Join
+                    {t('comingSoon.joinButton')}
                   </Button>
                 </form>
               ) : (
@@ -121,8 +119,8 @@ const ComingSoon = () => {
                       </svg>
                     </div>
                     <div>
-                      <p className="text-forest font-semibold">You're on the list!</p>
-                      <p className="text-forest-light text-sm">We'll notify you when Chefriends launches.</p>
+                      <p className="text-forest font-semibold">{t('comingSoon.success.title')}</p>
+                      <p className="text-forest-light text-sm">{t('comingSoon.success.subtitle')}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -131,14 +129,13 @@ const ComingSoon = () => {
                 <p className="text-error text-sm mt-3">{error}</p>
               )}
 
-              {/* Platform info */}
               <div className="flex items-center gap-6 mt-8 pt-6 border-t border-border-light">
                 <div className="flex items-center gap-2">
                   <svg className="w-5 h-5 text-forest-muted" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                   </svg>
                   <div>
-                    <p className="text-forest text-sm font-medium">iOS first</p>
+                    <p className="text-forest text-sm font-medium">{t('comingSoon.iosFirst')}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -147,13 +144,12 @@ const ComingSoon = () => {
                     <polyline points="12 6 12 12 16 14"/>
                   </svg>
                   <div>
-                    <p className="text-forest text-sm font-medium">2026</p>
+                    <p className="text-forest text-sm font-medium">{t('comingSoon.year')}</p>
                   </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Chef grid */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -163,7 +159,7 @@ const ComingSoon = () => {
             >
               <div className="bg-cream rounded-2xl border border-border-light p-8">
                 <p className="text-xs font-medium text-forest-muted tracking-wide uppercase mb-5">
-                  Chef Roster
+                  {t('comingSoon.chefRoster')}
                 </p>
                 <div className="grid grid-cols-4 gap-4">
                   {chefColors.map((chef, i) => (

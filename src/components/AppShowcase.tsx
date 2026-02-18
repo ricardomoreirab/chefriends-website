@@ -1,30 +1,20 @@
 import { motion } from 'framer-motion'
+import { useI18n } from '../i18n'
 
 import pepeImg from '../assets/chefs/pepe.png'
 import yukiImg from '../assets/chefs/yuki.png'
 import jacquesImg from '../assets/chefs/jacques.png'
 import carlosImg from '../assets/chefs/carlos.png'
 
-/* ────────────────────────────────────── */
-/*  Reusable phone-frame wrapper         */
-/* ────────────────────────────────────── */
 const PhoneFrame = ({ children }: { children: React.ReactNode }) => (
   <div className="relative w-[280px] sm:w-[300px] mx-auto">
-    {/* Side buttons — left */}
     <div className="absolute -left-[2.5px] top-[90px] w-[3px] h-[28px] bg-[#2C2C2E] rounded-l-sm" />
     <div className="absolute -left-[2.5px] top-[132px] w-[3px] h-[44px] bg-[#2C2C2E] rounded-l-sm" />
     <div className="absolute -left-[2.5px] top-[186px] w-[3px] h-[44px] bg-[#2C2C2E] rounded-l-sm" />
-    {/* Side button — right */}
     <div className="absolute -right-[2.5px] top-[148px] w-[3px] h-[64px] bg-[#2C2C2E] rounded-r-sm" />
-
-    {/* Phone body */}
     <div className="bg-[#1D1D1F] rounded-[48px] sm:rounded-[52px] p-[10px] sm:p-[12px] shadow-[0_25px_60px_-10px_rgba(0,0,0,0.25)]">
-      {/* Screen with iPhone 15 Pro aspect ratio */}
       <div className="bg-cream rounded-[40px] sm:rounded-[42px] overflow-hidden relative flex flex-col" style={{ aspectRatio: '9 / 19.5' }}>
-        {/* Dynamic Island */}
         <div className="absolute top-[10px] left-1/2 -translate-x-1/2 w-[90px] h-[25px] bg-[#1D1D1F] rounded-full z-10" />
-
-        {/* Status bar (below Dynamic Island) */}
         <div className="px-7 pt-[42px] pb-1 flex justify-between items-center shrink-0">
           <span className="text-[10px] text-forest-muted font-semibold">9:41</span>
           <div className="flex gap-1 items-center">
@@ -38,13 +28,9 @@ const PhoneFrame = ({ children }: { children: React.ReactNode }) => (
             </div>
           </div>
         </div>
-
-        {/* Content area */}
         <div className="flex-1 flex flex-col min-h-0">
           {children}
         </div>
-
-        {/* Home indicator — pinned to bottom */}
         <div className="flex justify-center pb-2.5 pt-1.5 shrink-0">
           <div className="w-[100px] h-[4px] bg-forest/15 rounded-full" />
         </div>
@@ -53,35 +39,27 @@ const PhoneFrame = ({ children }: { children: React.ReactNode }) => (
   </div>
 )
 
-/* ────────────────────────────────────── */
-/*  Screen 1 — Chef Select               */
-/* ────────────────────────────────────── */
-const ChefSelectMockup = () => (
+const ChefSelectMockup = ({ t }: { t: (key: string) => string }) => (
   <PhoneFrame>
-    {/* Header */}
     <div className="px-4 pt-1 pb-3">
       <div className="flex items-center mb-1.5">
         <div className="w-8 h-8 bg-card-white rounded-[10px] border border-border flex items-center justify-center">
           <svg className="w-4 h-4 text-forest-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         </div>
-        <p className="font-serif text-[13px] text-forest text-center flex-1 leading-tight">CHOOSE YOUR<br/>CHEF FRIEND</p>
+        <p className="font-serif text-[13px] text-forest text-center flex-1 leading-tight whitespace-pre-line">{t('appShowcase.phone.chooseChef')}</p>
         <div className="w-8 h-8 bg-card-white rounded-[10px] border border-border flex items-center justify-center">
           <svg className="w-4 h-4 text-forest-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
       </div>
-      <p className="text-[9px] text-forest-light">Pick a chef friend to cook with today</p>
+      <p className="text-[9px] text-forest-light">{t('appShowcase.phone.pickChef')}</p>
     </div>
-
-    {/* Border separator */}
     <div className="h-px bg-border" />
-
-    {/* Grid of chefs */}
     <div className="px-3 py-3 grid grid-cols-2 gap-2">
       {[
-        { img: pepeImg, name: 'Pepe', specialty: 'Italian home cooking', color: '#E85D2C', selected: true },
-        { img: yukiImg, name: 'Yuki', specialty: 'Japanese home cooking', color: '#D94040', selected: false },
-        { img: jacquesImg, name: 'Jacques', specialty: 'French home cooking', color: '#4A86C8', selected: false },
-        { img: carlosImg, name: 'Carlos', specialty: 'Mexican home cooking', color: '#D4A017', selected: false },
+        { img: pepeImg, name: 'Pepe', specialty: t('appShowcase.phone.italianHome'), color: '#E85D2C', selected: true },
+        { img: yukiImg, name: 'Yuki', specialty: t('appShowcase.phone.japaneseHome'), color: '#D94040', selected: false },
+        { img: jacquesImg, name: 'Jacques', specialty: t('appShowcase.phone.frenchHome'), color: '#4A86C8', selected: false },
+        { img: carlosImg, name: 'Carlos', specialty: t('appShowcase.phone.mexicanHome'), color: '#D4A017', selected: false },
       ].map((chef) => (
         <div
           key={chef.name}
@@ -90,7 +68,6 @@ const ChefSelectMockup = () => (
           }`}
           style={chef.selected ? { borderColor: chef.color } : {}}
         >
-          {/* Favorite heart */}
           <svg className="absolute top-1.5 right-1.5 w-3.5 h-3.5 text-forest-muted/30 z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           <div className="aspect-[0.9/1] flex items-end justify-center px-0.5 pt-1">
             <img src={chef.img} alt={chef.name} className="w-full h-full object-contain" />
@@ -106,12 +83,8 @@ const ChefSelectMockup = () => (
   </PhoneFrame>
 )
 
-/* ────────────────────────────────────── */
-/*  Screen 2 — Recipe Suggestions         */
-/* ────────────────────────────────────── */
-const RecipesMockup = () => (
+const RecipesMockup = ({ t }: { t: (key: string) => string }) => (
   <PhoneFrame>
-    {/* Header with chef */}
     <div className="px-4 pt-1 pb-2 flex items-center border-b border-border">
       <div className="w-8 h-8 flex items-center justify-center">
         <svg className="w-4 h-4 text-forest-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
@@ -122,36 +95,29 @@ const RecipesMockup = () => (
       </div>
       <div className="w-8" />
     </div>
-
-    {/* Ingredient strip */}
     <div className="bg-cream-dark border-b border-border px-4 py-2 flex gap-1.5 overflow-hidden">
       {['Chicken', 'Garlic', 'Lemon', 'Rosemary'].map(i => (
         <span key={i} className="bg-card-white border text-[9px] px-2.5 py-0.5 rounded-pill font-medium whitespace-nowrap capitalize" style={{ borderColor: '#E85D2C44', color: '#E85D2C' }}>{i}</span>
       ))}
     </div>
-
-    {/* Section title */}
     <div className="px-5 pt-3 pb-1">
-      <p className="font-serif text-[13px] text-forest">RECIPE IDEAS</p>
+      <p className="font-serif text-[13px] text-forest">{t('appShowcase.phone.recipeIdeas')}</p>
     </div>
-
-    {/* Recipe cards */}
     <div className="px-4 pb-3 space-y-2.5">
-      {/* Recipe card 1 */}
       <div className="bg-card-white rounded-[16px] p-3 border border-border" style={{ borderLeftWidth: 4, borderLeftColor: '#4A7C59' }}>
         <div className="flex justify-between items-start mb-1">
-          <p className="font-serif text-[11px] text-forest flex-1">Lemon Herb Roast Chicken</p>
-          <span className="text-[8px] font-bold text-white px-2 py-0.5 rounded-pill ml-2" style={{ backgroundColor: '#4A7C59' }}>Easy</span>
+          <p className="font-serif text-[11px] text-forest flex-1">{t('appShowcase.phone.recipe1.title')}</p>
+          <span className="text-[8px] font-bold text-white px-2 py-0.5 rounded-pill ml-2" style={{ backgroundColor: '#4A7C59' }}>{t('appShowcase.phone.recipe1.difficulty')}</span>
         </div>
-        <p className="text-[9px] text-forest-light mb-2 leading-relaxed">Classic roasted chicken with bright lemon and fresh rosemary.</p>
+        <p className="text-[9px] text-forest-light mb-2 leading-relaxed">{t('appShowcase.phone.recipe1.description')}</p>
         <div className="flex justify-between items-center mb-2">
           <div className="flex items-center gap-1">
             <svg className="w-2.5 h-2.5 text-forest-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span className="text-[8px] text-forest-light">45 min</span>
+            <span className="text-[8px] text-forest-light">{t('appShowcase.phone.recipe1.time')}</span>
           </div>
           <div className="flex gap-1">
-            <span className="text-[8px] bg-cream-dark border border-border px-1.5 py-0.5 rounded-pill text-forest-light">Dinner</span>
-            <span className="text-[8px] bg-cream-dark border border-border px-1.5 py-0.5 rounded-pill text-forest-light">Italian</span>
+            <span className="text-[8px] bg-cream-dark border border-border px-1.5 py-0.5 rounded-pill text-forest-light">{t('appShowcase.phone.recipe1.category')}</span>
+            <span className="text-[8px] bg-cream-dark border border-border px-1.5 py-0.5 rounded-pill text-forest-light">{t('meetTheChefs.cuisine.italian')}</span>
           </div>
         </div>
         <div className="flex gap-2 items-center">
@@ -159,25 +125,23 @@ const RecipesMockup = () => (
             <svg className="w-3.5 h-3.5" style={{ color: '#4A7C59' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
           </div>
           <div className="flex-1 text-center py-2 rounded-pill text-[9px] font-bold text-white" style={{ backgroundColor: '#4A7C59' }}>
-            LET'S COOK THIS!
+            {t('appShowcase.phone.letsCook')}
           </div>
         </div>
       </div>
-
-      {/* Recipe card 2 */}
       <div className="bg-card-white rounded-[16px] p-3 border border-border" style={{ borderLeftWidth: 4, borderLeftColor: '#D4A017' }}>
         <div className="flex justify-between items-start mb-1">
-          <p className="font-serif text-[11px] text-forest flex-1">Garlic Chicken Risotto</p>
-          <span className="text-[8px] font-bold text-white px-2 py-0.5 rounded-pill ml-2" style={{ backgroundColor: '#D4A017' }}>Medium</span>
+          <p className="font-serif text-[11px] text-forest flex-1">{t('appShowcase.phone.recipe2.title')}</p>
+          <span className="text-[8px] font-bold text-white px-2 py-0.5 rounded-pill ml-2" style={{ backgroundColor: '#D4A017' }}>{t('appShowcase.phone.recipe2.difficulty')}</span>
         </div>
-        <p className="text-[9px] text-forest-light mb-2 leading-relaxed">Creamy risotto with tender chicken and aromatic garlic.</p>
+        <p className="text-[9px] text-forest-light mb-2 leading-relaxed">{t('appShowcase.phone.recipe2.description')}</p>
         <div className="flex justify-between items-center mb-2">
           <div className="flex items-center gap-1">
             <svg className="w-2.5 h-2.5 text-forest-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span className="text-[8px] text-forest-light">35 min</span>
+            <span className="text-[8px] text-forest-light">{t('appShowcase.phone.recipe2.time')}</span>
           </div>
           <div className="flex gap-1">
-            <span className="text-[8px] bg-cream-dark border border-border px-1.5 py-0.5 rounded-pill text-forest-light">Comfort</span>
+            <span className="text-[8px] bg-cream-dark border border-border px-1.5 py-0.5 rounded-pill text-forest-light">{t('appShowcase.phone.recipe2.category')}</span>
           </div>
         </div>
         <div className="flex gap-2 items-center">
@@ -185,7 +149,7 @@ const RecipesMockup = () => (
             <svg className="w-3.5 h-3.5" style={{ color: '#D4A017' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
           </div>
           <div className="flex-1 text-center py-2 rounded-pill text-[9px] font-bold text-white" style={{ backgroundColor: '#D4A017' }}>
-            LET'S COOK THIS!
+            {t('appShowcase.phone.letsCook')}
           </div>
         </div>
       </div>
@@ -193,34 +157,23 @@ const RecipesMockup = () => (
   </PhoneFrame>
 )
 
-/* ────────────────────────────────────── */
-/*  Screen 3 — Cooking Session            */
-/* ────────────────────────────────────── */
-const CookingMockup = () => (
+const CookingMockup = ({ t }: { t: (key: string) => string }) => (
   <PhoneFrame>
-    {/* Header */}
     <div className="px-4 pt-1 pb-2 flex items-center">
       <div className="w-8 h-8 flex items-center justify-center">
         <svg className="w-4 h-4 text-forest-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </div>
       <div className="flex-1 text-center">
-        <p className="font-serif text-[11px] text-forest">Lemon Herb Roast Chicken</p>
+        <p className="font-serif text-[11px] text-forest">{t('appShowcase.phone.recipe1.title')}</p>
         <p className="text-[9px] mt-0.5" style={{ color: '#E85D2C' }}>Pepe</p>
       </div>
       <div className="w-8" />
     </div>
-
-    {/* Progress bar */}
     <div className="h-[3px] bg-border">
       <div className="h-full w-[43%]" style={{ backgroundColor: '#E85D2C' }} />
     </div>
-
-    {/* Step content */}
     <div className="flex-1 px-5 pt-5">
-      {/* Step counter */}
-      <p className="font-serif text-[13px] text-center mb-3" style={{ color: '#E85D2C' }}>STEP 3 OF 7</p>
-
-      {/* Progress dots */}
+      <p className="font-serif text-[13px] text-center mb-3" style={{ color: '#E85D2C' }}>{t('appShowcase.phone.stepOf')}</p>
       <div className="flex justify-center gap-1.5 mb-4">
         <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#4A7C59' }} />
         <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#4A7C59' }} />
@@ -230,47 +183,38 @@ const CookingMockup = () => (
         <div className="w-2 h-2 rounded-full bg-border" />
         <div className="w-2 h-2 rounded-full bg-border" />
       </div>
-
-      {/* Time badge */}
       <div className="flex justify-center mb-4">
         <span className="bg-card-white border border-border rounded-pill px-3 py-1 text-[9px] text-forest-light font-medium flex items-center gap-1.5">
           <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          ~10 min
+          {t('appShowcase.phone.cookTime')}
         </span>
       </div>
-
-      {/* Instruction card */}
       <div className="p-4 bg-card-white rounded-[16px] border shadow-soft" style={{ borderColor: '#E85D2C' }}>
         <p className="text-[11px] text-forest text-center leading-relaxed">
-          Place the chicken in a roasting pan, rub with olive oil, salt, and pepper. Stuff the cavity with lemon halves and rosemary sprigs.
+          {t('appShowcase.phone.instruction')}
         </p>
       </div>
-
-      {/* Chef tip */}
       <div className="mt-3 p-3 bg-cream-dark rounded-[16px] border border-accent">
-        <p className="text-[9px] font-bold text-accent-dark uppercase tracking-wider mb-1">PEPE'S TIP</p>
+        <p className="text-[9px] font-bold text-accent-dark uppercase tracking-wider mb-1">{t('appShowcase.phone.pepeTip')}</p>
         <p className="text-[10px] text-forest-light italic leading-relaxed">
-          Let the chicken come to room temperature for 30 minutes before roasting — it cooks more evenly!
+          {t('appShowcase.phone.tipText')}
         </p>
       </div>
     </div>
-
-    {/* Footer nav buttons */}
     <div className="shrink-0 border-t border-border px-4 py-2.5 flex gap-2.5">
       <div className="flex-1 bg-card-white border border-border text-center py-2.5 rounded-pill text-[10px] font-bold text-forest-light">
-        PREV
+        {t('appShowcase.phone.prev')}
       </div>
       <div className="flex-1 text-center py-2.5 rounded-pill text-[10px] font-bold text-white shadow-soft" style={{ backgroundColor: '#E85D2C' }}>
-        NEXT
+        {t('appShowcase.phone.next')}
       </div>
     </div>
   </PhoneFrame>
 )
 
-/* ────────────────────────────────────── */
-/*  Main section                          */
-/* ────────────────────────────────────── */
 const AppShowcase = () => {
+  const { t } = useI18n()
+
   return (
     <section className="py-24 bg-cream-dark relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
@@ -282,65 +226,42 @@ const AppShowcase = () => {
           className="text-center mb-16"
         >
           <p className="text-sm font-medium text-forest-muted tracking-wide uppercase mb-4">
-            The App
+            {t('appShowcase.label')}
           </p>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-forest mb-6">
-            See it{' '}
-            <span className="italic">in action</span>
+            {t('appShowcase.title')}{' '}
+            <span className="italic">{t('appShowcase.titleHighlight')}</span>
           </h2>
           <p className="text-lg text-forest-light max-w-2xl mx-auto">
-            From picking your chef to plating the final dish. Here's what
-            cooking with Chefriends looks like.
+            {t('appShowcase.subtitle')}
           </p>
         </motion.div>
 
-        {/* 3 phone screens side by side */}
         <div className="grid md:grid-cols-3 gap-8 lg:gap-12 items-start">
-          {/* Screen 1: Chef Select */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0 }}
-            className="text-center"
-          >
-            <ChefSelectMockup />
+          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0 }} className="text-center">
+            <ChefSelectMockup t={t} />
             <div className="mt-6">
-              <span className="inline-block bg-forest text-cream text-xs font-semibold px-3 py-1 rounded-pill mb-2">Step 1</span>
-              <h3 className="font-serif text-lg text-forest mb-1">Pick a Chef</h3>
-              <p className="text-sm text-forest-light">Choose the cuisine you're craving. Each chef brings their own authentic style.</p>
+              <span className="inline-block bg-forest text-cream text-xs font-semibold px-3 py-1 rounded-pill mb-2">{t('appShowcase.step1.label')}</span>
+              <h3 className="font-serif text-lg text-forest mb-1">{t('appShowcase.step1.title')}</h3>
+              <p className="text-sm text-forest-light">{t('appShowcase.step1.description')}</p>
             </div>
           </motion.div>
 
-          {/* Screen 2: Recipe Suggestions */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-center"
-          >
-            <RecipesMockup />
+          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.15 }} className="text-center">
+            <RecipesMockup t={t} />
             <div className="mt-6">
-              <span className="inline-block bg-forest text-cream text-xs font-semibold px-3 py-1 rounded-pill mb-2">Step 2</span>
-              <h3 className="font-serif text-lg text-forest mb-1">Get Recipes</h3>
-              <p className="text-sm text-forest-light">Your chef suggests recipes based on what you have. Refresh for new ideas.</p>
+              <span className="inline-block bg-forest text-cream text-xs font-semibold px-3 py-1 rounded-pill mb-2">{t('appShowcase.step2.label')}</span>
+              <h3 className="font-serif text-lg text-forest mb-1">{t('appShowcase.step2.title')}</h3>
+              <p className="text-sm text-forest-light">{t('appShowcase.step2.description')}</p>
             </div>
           </motion.div>
 
-          {/* Screen 3: Cooking Session */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-center"
-          >
-            <CookingMockup />
+          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }} className="text-center">
+            <CookingMockup t={t} />
             <div className="mt-6">
-              <span className="inline-block bg-forest text-cream text-xs font-semibold px-3 py-1 rounded-pill mb-2">Step 3</span>
-              <h3 className="font-serif text-lg text-forest mb-1">Cook Step by Step</h3>
-              <p className="text-sm text-forest-light">Swipe through instructions with chef tips, timers, and ingredient scaling.</p>
+              <span className="inline-block bg-forest text-cream text-xs font-semibold px-3 py-1 rounded-pill mb-2">{t('appShowcase.step3.label')}</span>
+              <h3 className="font-serif text-lg text-forest mb-1">{t('appShowcase.step3.title')}</h3>
+              <p className="text-sm text-forest-light">{t('appShowcase.step3.description')}</p>
             </div>
           </motion.div>
         </div>

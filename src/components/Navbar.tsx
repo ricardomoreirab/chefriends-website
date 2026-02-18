@@ -1,10 +1,19 @@
 import { useState, useEffect } from 'react'
+import { useI18n, type Locale } from '../i18n'
+
+const languages: { key: Locale; label: string }[] = [
+  { key: 'en', label: 'EN' },
+  { key: 'pt', label: 'PT' },
+  { key: 'es', label: 'ES' },
+]
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [hasScrolled, setHasScrolled] = useState(false)
+  const [isLangOpen, setIsLangOpen] = useState(false)
+  const { locale, setLocale, t } = useI18n()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,10 +33,17 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [lastScrollY])
 
+  useEffect(() => {
+    if (!isLangOpen) return
+    const close = () => setIsLangOpen(false)
+    document.addEventListener('click', close)
+    return () => document.removeEventListener('click', close)
+  }, [isLangOpen])
+
   const menuItems = [
-    { label: 'Features', href: '#features' },
-    { label: 'Chefs', href: '#meet-the-chefs' },
-    { label: 'How It Works', href: '#how-it-works' },
+    { label: t('navbar.features'), href: '#features' },
+    { label: t('navbar.chefs'), href: '#meet-the-chefs' },
+    { label: t('navbar.howItWorks'), href: '#how-it-works' },
   ]
 
   return (
@@ -44,7 +60,7 @@ const Navbar = () => {
         {/* Left: hamburger + brand */}
         <div className="flex items-center gap-4">
           <button
-            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={isMenuOpen ? t('navbar.closeMenu') : t('navbar.openMenu')}
             className="sm:hidden text-forest p-2 hover:bg-cream-dark/50 rounded-lg transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
@@ -76,14 +92,47 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Right: CTA */}
-        <div className="hidden sm:block">
-          <a
-            href="#coming-soon"
-            className="bg-forest text-cream px-5 py-2 rounded-pill text-sm font-semibold hover:bg-forest/90 transition-colors"
-          >
-            Join Waitlist
-          </a>
+        {/* Right: language selector + CTA */}
+        <div className="flex items-center gap-2">
+          {/* Language selector */}
+          <div className="relative">
+            <button
+              onClick={(e) => { e.stopPropagation(); setIsLangOpen(!isLangOpen) }}
+              className="text-forest-light hover:text-forest transition-colors text-sm font-medium px-3 py-2 rounded-pill hover:bg-cream-dark/60 flex items-center gap-1.5"
+            >
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              {locale.toUpperCase()}
+            </button>
+            {isLangOpen && (
+              <div className="absolute right-0 top-full mt-1 bg-card-white border border-border rounded-xl shadow-soft overflow-hidden min-w-[100px]">
+                {languages.map((lang) => (
+                  <button
+                    key={lang.key}
+                    onClick={(e) => { e.stopPropagation(); setLocale(lang.key); setIsLangOpen(false) }}
+                    className={`block w-full text-left px-4 py-2.5 text-sm transition-colors ${
+                      locale === lang.key
+                        ? 'bg-accent/15 text-forest font-semibold'
+                        : 'text-forest-light hover:bg-cream-dark/60 hover:text-forest'
+                    }`}
+                  >
+                    {lang.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="hidden sm:block">
+            <a
+              href="#coming-soon"
+              className="bg-forest text-cream px-5 py-2 rounded-pill text-sm font-semibold hover:bg-forest/90 transition-colors"
+            >
+              {t('navbar.joinWaitlist')}
+            </a>
+          </div>
         </div>
       </div>
 
@@ -105,8 +154,24 @@ const Navbar = () => {
             className="block bg-forest text-cream px-4 py-3 rounded-pill text-center text-sm font-semibold mt-4"
             onClick={() => setIsMenuOpen(false)}
           >
-            Join Waitlist
+            {t('navbar.joinWaitlist')}
           </a>
+          {/* Mobile language selector */}
+          <div className="flex justify-center gap-2 mt-4 pt-4 border-t border-border-light">
+            {languages.map((lang) => (
+              <button
+                key={lang.key}
+                onClick={() => { setLocale(lang.key); setIsMenuOpen(false) }}
+                className={`px-4 py-2 rounded-pill text-sm font-medium transition-colors ${
+                  locale === lang.key
+                    ? 'bg-forest text-cream'
+                    : 'bg-cream-dark text-forest-light hover:text-forest'
+                }`}
+              >
+                {lang.label}
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </nav>

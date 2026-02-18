@@ -1,20 +1,22 @@
 import { Link } from '@heroui/react'
+import { useI18n } from '../i18n'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
+  const { t } = useI18n()
 
   const footerLinks = {
-    Product: [
-      { label: 'Features', href: '#features' },
-      { label: 'Meet the Chefs', href: '#meet-the-chefs' },
-      { label: 'How It Works', href: '#how-it-works' },
+    [t('footer.product')]: [
+      { label: t('footer.features'), href: '#features' },
+      { label: t('footer.meetTheChefs'), href: '#meet-the-chefs' },
+      { label: t('footer.howItWorks'), href: '#how-it-works' },
     ],
-    Legal: [
-      { label: 'Privacy Policy', href: '/privacy' },
-      { label: 'Terms of Service', href: '/terms' },
+    [t('footer.legal')]: [
+      { label: t('footer.privacy'), href: '/privacy' },
+      { label: t('footer.terms'), href: '/terms' },
     ],
-    Support: [
-      { label: 'Contact Us', href: 'mailto:hello@chefriendsapp.com' },
+    [t('footer.support')]: [
+      { label: t('footer.contact'), href: 'mailto:hello@chefriendsapp.com' },
     ],
   }
 
@@ -45,16 +47,13 @@ const Footer = () => {
     <footer className="bg-cream border-t border-border">
       <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 py-16">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
-          {/* Brand */}
           <div className="col-span-2">
             <Link href="#" className="inline-block mb-4">
               <span className="font-serif text-2xl text-forest">Chefriends</span>
             </Link>
             <p className="text-forest-light mb-6 max-w-xs text-sm leading-relaxed">
-              Your AI chef friends, each specialized in a different cuisine. Scan ingredients, pick a
-              chef, and cook with confidence.
+              {t('footer.tagline')}
             </p>
-            {/* Social links */}
             <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <Link
@@ -69,7 +68,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Links */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
               <h4 className="text-sm font-semibold text-forest mb-4">{category}</h4>
@@ -89,10 +87,9 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-border-light flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-forest-muted text-sm">
-            &copy; {currentYear} Chefriends. All rights reserved.
+            &copy; {currentYear} {t('footer.copyright')}
           </p>
         </div>
       </div>

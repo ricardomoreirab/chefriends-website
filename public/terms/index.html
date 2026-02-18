@@ -22,6 +22,15 @@
 </head>
 <body>
   <div class="container">
+    <div id="lang-notice" style="display:none; background:#FFF4EC; border:1px solid #E8DDD0; border-radius:8px; padding:12px 16px; margin-bottom:24px; font-size:13px; color:#6B7259;"></div>
+    <script>
+      (function() {
+        var lang = localStorage.getItem('chefriends-lang');
+        var notice = document.getElementById('lang-notice');
+        if (lang === 'pt') { notice.textContent = 'Este documento esta disponivel apenas em ingles.'; notice.style.display = 'block'; }
+        else if (lang === 'es') { notice.textContent = 'Este documento solo esta disponible en ingles.'; notice.style.display = 'block'; }
+      })();
+    </script>
     <a href="/" class="back">&larr; Back to Chefriends</a>
     <h1>Terms of Service</h1>
     <p class="updated">Last updated: February 2026</p>
