@@ -1,9 +1,6 @@
-name = "chefriends-website"
+name = "chefriendsapp"
 compatibility_date = "2026-01-24"
-
-[pages]
-build_command = "npm run build"
-build_output_dir = "dist"
+pages_build_output_dir = "dist"
 
 # KV namespace for waitlist emails
 [[kv_namespaces]]
