@@ -6,8 +6,8 @@ import { readFileSync } from 'fs'
 // Middleware to replicate Cloudflare _redirects locally
 function serveStaticHtml() {
   const routes: Record<string, string> = {
-    '/privacy': 'public/privacy.html',
-    '/terms': 'public/terms.html',
+    '/privacy': 'public/privacy/index.html',
+    '/terms': 'public/terms/index.html',
   }
   return {
     name: 'serve-static-html',
