@@ -3,44 +3,60 @@ import { motion } from 'framer-motion'
 const steps = [
   {
     number: '01',
-    title: 'Download',
-    description: 'Get the app and create your profile. Tell us about your cooking level and favorite cuisines.',
-    icon: 'DL',
-    color: 'text-pixel-orange',
-    borderColor: 'border-pixel-orange/30',
+    title: 'Add Ingredients',
+    description: 'Scan your fridge with the camera, upload a photo, or type what you have. The AI identifies everything instantly.',
+    icon: (
+      <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+        <circle cx="12" cy="13" r="4"/>
+      </svg>
+    ),
+    color: '#E85D2C',
   },
   {
     number: '02',
     title: 'Pick a Chef',
-    description: 'Browse our AI chef friends and choose the cuisine you want to explore. Each chef has their own personality.',
-    icon: '??',
-    color: 'text-pixel-green',
-    borderColor: 'border-pixel-green/30',
+    description: 'Choose from 8 AI chef friends, each specialized in a different cuisine. Pick the one that matches your craving.',
+    icon: (
+      <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    ),
+    color: '#4A86C8',
   },
   {
     number: '03',
-    title: 'Start Cooking',
-    description: 'Chat with your chef friend, get personalized recipes, and follow step-by-step guidance as you cook.',
-    icon: '!!',
-    color: 'text-pixel-gold',
-    borderColor: 'border-pixel-gold/30',
+    title: 'Get Recipes',
+    description: 'Your chef friend suggests personalized recipes based on your ingredients, preferences, and dietary needs.',
+    icon: (
+      <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+      </svg>
+    ),
+    color: '#D4A017',
   },
   {
     number: '04',
-    title: 'Level Up',
-    description: 'Want to go deeper? Join live cooking classes with real professional chefs and learn advanced techniques.',
-    icon: 'UP',
-    color: 'text-pixel-purple',
-    borderColor: 'border-pixel-purple/30',
+    title: 'Cook Step by Step',
+    description: 'Follow clear instructions with chef tips, adjust servings, and get a shopping list for any missing ingredients.',
+    icon: (
+      <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <polyline points="9 11 12 14 22 4"/>
+        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+      </svg>
+    ),
+    color: '#6FA030',
   },
 ]
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="py-24 bg-dark grid-bg relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-deep via-transparent to-deep pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
+    <section id="how-it-works" className="py-24 bg-cream-dark relative">
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,23 +64,21 @@ const HowItWorks = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="font-pixel text-[10px] text-pixel-green tracking-wider mb-6 block">
-            [ HOW IT WORKS ]
-          </span>
-          <h2 className="font-pixel text-xl sm:text-2xl lg:text-3xl text-text-bright mb-6 leading-relaxed">
-            Get Started in{' '}
-            <span className="text-pixel-orange glow-orange">
-              4 Steps
-            </span>
+          <p className="text-sm font-medium text-forest-muted tracking-wide uppercase mb-4">
+            How It Works
+          </p>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-forest mb-6">
+            From fridge to plate{' '}
+            <span className="italic">in 4 steps</span>
           </h2>
-          <p className="text-lg text-text-dim max-w-2xl mx-auto">
-            From download to your first dish — your AI chef friend is just a tap away.
+          <p className="text-lg text-forest-light max-w-2xl mx-auto">
+            No meal planning, no recipe searching. Just open the app, show what you have, and start cooking.
           </p>
         </motion.div>
 
         <div className="relative">
           {/* Connection line */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pixel-orange/20 to-transparent -translate-y-1/2" />
+          <div className="hidden lg:block absolute top-1/2 left-12 right-12 h-px bg-border -translate-y-1/2 z-0" />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {steps.map((step, index) => (
@@ -73,93 +87,30 @@ const HowItWorks = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                className="relative"
+                transition={{ duration: 0.5, delay: index * 0.12 }}
+                className="relative z-10"
               >
-                <div className={`bg-card/50 border ${step.borderColor} p-8 text-center relative z-10 h-full`}>
+                <div className="card-warm p-7 text-center h-full">
                   {/* Step number */}
-                  <div className="absolute top-3 right-3">
-                    <span className="font-pixel text-[10px] text-text-dim">{step.number}</span>
+                  <span className="text-xs font-semibold text-forest-muted tracking-wider">
+                    STEP {step.number}
+                  </span>
+
+                  {/* Icon */}
+                  <div
+                    className="w-16 h-16 mx-auto mt-4 mb-5 rounded-2xl flex items-center justify-center"
+                    style={{ backgroundColor: `${step.color}12`, color: step.color }}
+                  >
+                    {step.icon}
                   </div>
 
-                  {/* Step icon */}
-                  <div className={`w-16 h-16 mx-auto mb-6 border-2 ${step.borderColor} flex items-center justify-center`}>
-                    <span className={`font-pixel text-lg ${step.color}`}>{step.icon}</span>
-                  </div>
-
-                  <h3 className="font-pixel text-xs text-text-bright mb-4 leading-relaxed">{step.title}</h3>
-                  <p className="text-text-dim leading-relaxed text-sm">{step.description}</p>
+                  <h3 className="font-serif text-lg text-forest mb-3">{step.title}</h3>
+                  <p className="text-forest-light leading-relaxed text-sm">{step.description}</p>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
-
-        {/* Free vs Pro comparison */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-20 grid md:grid-cols-2 gap-6"
-        >
-          {/* Free Tier */}
-          <div className="bg-card/30 border border-pixel-orange/20 p-8">
-            <div className="flex items-center gap-4 mb-6 pb-4 border-b border-pixel-orange/10">
-              <div className="w-12 h-12 border border-pixel-orange/30 flex items-center justify-center">
-                <span className="font-pixel text-xs text-pixel-orange">AI</span>
-              </div>
-              <div>
-                <h3 className="font-pixel text-sm text-pixel-orange">FREE</h3>
-                <p className="text-text-dim text-sm">AI Chef Friends</p>
-              </div>
-            </div>
-            <ul className="space-y-3">
-              {[
-                'Chat with all AI chef friends',
-                'Personalized recipe suggestions',
-                'Step-by-step cooking guidance',
-                'Dietary preference support',
-                'Save your favorite recipes',
-              ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3">
-                  <span className="font-pixel text-[8px] text-pixel-green">+</span>
-                  <span className="text-text-dim text-sm">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Pro Tier */}
-          <div className="bg-card/30 border border-pixel-gold/30 p-8 relative pixel-border-gold">
-            <div className="absolute -top-px -right-px font-pixel text-[8px] bg-pixel-gold text-deep px-3 py-1">
-              PRO
-            </div>
-            <div className="flex items-center gap-4 mb-6 pb-4 border-b border-pixel-gold/10">
-              <div className="w-12 h-12 border border-pixel-gold/30 flex items-center justify-center">
-                <span className="font-pixel text-[10px] text-pixel-gold">LV</span>
-              </div>
-              <div>
-                <h3 className="font-pixel text-sm text-pixel-gold">PRO</h3>
-                <p className="text-text-dim text-sm">Live Chef Classes</p>
-              </div>
-            </div>
-            <ul className="space-y-3">
-              {[
-                'Everything in Free, plus:',
-                'Live cooking classes with real chefs',
-                'Interactive Q&A during sessions',
-                'Exclusive recipes and techniques',
-                'Class recordings to rewatch anytime',
-              ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3">
-                  <span className="font-pixel text-[8px] text-pixel-gold">+</span>
-                  <span className="text-text-dim text-sm">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </motion.div>
       </div>
     </section>
   )

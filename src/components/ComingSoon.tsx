@@ -1,8 +1,17 @@
 import { Button, Input } from '@heroui/react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import PixelChef from './PixelChef'
-import type { ChefId } from './PixelChef'
+
+const chefColors = [
+  { name: 'Pepe', color: '#E85D2C', letter: 'P' },
+  { name: 'Yuki', color: '#D94040', letter: 'Y' },
+  { name: 'Carlos', color: '#D4A017', letter: 'C' },
+  { name: 'Priya', color: '#E85D2C', letter: 'P' },
+  { name: 'Jacques', color: '#4A86C8', letter: 'J' },
+  { name: 'Somchai', color: '#8B6FC0', letter: 'S' },
+  { name: 'Renata', color: '#6FA030', letter: 'R' },
+  { name: 'Joan', color: '#C84A20', letter: 'J' },
+]
 
 const ComingSoon = () => {
   const [email, setEmail] = useState('')
@@ -39,17 +48,14 @@ const ComingSoon = () => {
     }
   }
 
-  const miniChefs: ChefId[] = ['pepe', 'yuki', 'carmen', 'priya', 'jacques', 'somchai']
-
   return (
-    <section id="coming-soon" className="py-24 bg-deep relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 grid-bg opacity-50" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-pixel-orange/3 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pixel-gold/3 rounded-full blur-3xl" />
+    <section id="coming-soon" className="py-24 bg-cream relative overflow-hidden">
+      {/* Decorative blobs */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-chef-jacques/5 rounded-full blur-3xl" />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
-        <div className="bg-card/30 pixel-border p-8 sm:p-12 lg:p-16">
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
+        <div className="bg-card-white rounded-3xl border border-border shadow-warm p-8 sm:p-12 lg:p-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Content */}
             <motion.div
@@ -58,23 +64,21 @@ const ComingSoon = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 bg-pixel-orange/10 text-pixel-orange px-4 py-2 font-pixel text-[8px] mb-8 pixel-border-subtle">
+              <div className="inline-flex items-center gap-2 bg-accent/15 text-forest px-4 py-1.5 rounded-pill text-sm font-medium mb-6">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pixel-orange opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-pixel-orange"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-dark"></span>
                 </span>
-                <span>COMING SOON</span>
+                <span>Coming soon</span>
               </div>
 
-              <h2 className="font-pixel text-lg sm:text-xl lg:text-2xl text-text-bright mb-6 leading-relaxed">
-                Be the First to{' '}
-                <span className="text-pixel-gold glow-gold block mt-2">
-                  Meet Your Chef Friends
-                </span>
+              <h2 className="font-serif text-3xl sm:text-4xl text-forest mb-4 leading-tight">
+                Be the first to{' '}
+                <span className="italic">meet your chef friends</span>
               </h2>
-              <p className="text-lg text-text-dim mb-8 leading-relaxed">
-                We're bringing AI chef friends and live cooking classes together in one app.
-                Join the waitlist to get early access.
+              <p className="text-lg text-forest-light mb-8 leading-relaxed">
+                Join the waitlist and we'll let you know when Chefriends
+                is ready. Available on iOS first.
               </p>
 
               {/* Email signup form */}
@@ -86,68 +90,70 @@ const ComingSoon = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     classNames={{
-                      input: "bg-deep/50 text-text-bright placeholder:text-text-dim",
-                      inputWrapper: "bg-deep/50 border-pixel-orange/30 hover:bg-deep/70 h-12 rounded-none",
+                      input: "bg-cream text-forest placeholder:text-forest-muted",
+                      inputWrapper: "bg-cream border border-border hover:bg-cream-dark h-12 rounded-pill shadow-none",
                     }}
-                    radius="none"
+                    radius="full"
                     size="lg"
                     required
                     isDisabled={isLoading}
                   />
                   <Button
                     type="submit"
-                    className="bg-pixel-orange text-deep font-bold h-12 px-8 font-pixel text-[10px] tracking-wider"
-                    radius="none"
+                    className="bg-forest text-cream font-semibold h-12 px-8 rounded-pill text-sm min-w-[120px]"
                     size="lg"
                     isLoading={isLoading}
                     isDisabled={isLoading}
                   >
-                    JOIN
+                    Join
                   </Button>
                 </form>
               ) : (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-pixel-green/10 border border-pixel-green/30 p-5"
+                  className="bg-success/5 border border-success/20 rounded-xl p-5"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="font-pixel text-xs text-pixel-green">OK</span>
+                    <div className="w-8 h-8 bg-success/10 rounded-full flex items-center justify-center flex-shrink-0">
+                      <svg className="w-4 h-4 text-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <polyline points="20 6 9 17 4 12"/>
+                      </svg>
+                    </div>
                     <div>
-                      <p className="text-text-bright font-semibold">You're on the list!</p>
-                      <p className="text-text-dim text-sm">We'll notify you when Chefriends launches.</p>
+                      <p className="text-forest font-semibold">You're on the list!</p>
+                      <p className="text-forest-light text-sm">We'll notify you when Chefriends launches.</p>
                     </div>
                   </div>
                 </motion.div>
               )}
               {error && (
-                <p className="text-pixel-red text-sm mt-3">{error}</p>
+                <p className="text-error text-sm mt-3">{error}</p>
               )}
 
-              {/* Coming soon info */}
-              <div className="flex items-center gap-8 mt-8 pt-6 border-t border-pixel-orange/10">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 border border-pixel-blue/30 flex items-center justify-center">
-                    <span className="font-pixel text-[8px] text-pixel-blue">AP</span>
-                  </div>
+              {/* Platform info */}
+              <div className="flex items-center gap-6 mt-8 pt-6 border-t border-border-light">
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-forest-muted" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                  </svg>
                   <div>
-                    <p className="text-text-bright text-sm font-medium">iOS & Android</p>
-                    <p className="text-text-dim text-xs">Both platforms</p>
+                    <p className="text-forest text-sm font-medium">iOS first</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 border border-pixel-green/30 flex items-center justify-center">
-                    <span className="font-pixel text-[8px] text-pixel-green">GO</span>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-forest-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
                   <div>
-                    <p className="text-text-bright text-sm font-medium">Early 2026</p>
-                    <p className="text-text-dim text-xs">Expected launch</p>
+                    <p className="text-forest text-sm font-medium">2026</p>
                   </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Chef parade */}
+            {/* Chef grid */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -155,48 +161,29 @@ const ComingSoon = () => {
               transition={{ duration: 0.6 }}
               className="hidden lg:block"
             >
-              <div className="bg-deep/50 border border-pixel-orange/10 p-8">
-                {/* Header */}
-                <div className="flex items-center gap-3 mb-6 pb-4 border-b border-pixel-orange/10">
-                  <span className="font-pixel text-[10px] text-pixel-orange">CHEF ROSTER</span>
-                  <div className="h-px flex-1 bg-pixel-orange/10" />
-                  <span className="font-pixel text-[8px] text-text-dim">6/6</span>
-                </div>
-
-                {/* Chef grid */}
-                <div className="grid grid-cols-3 gap-6">
-                  {miniChefs.map((chefId, i) => (
+              <div className="bg-cream rounded-2xl border border-border-light p-8">
+                <p className="text-xs font-medium text-forest-muted tracking-wide uppercase mb-5">
+                  Chef Roster
+                </p>
+                <div className="grid grid-cols-4 gap-4">
+                  {chefColors.map((chef, i) => (
                     <motion.div
-                      key={chefId}
+                      key={chef.name}
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ delay: 0.1 * i }}
+                      transition={{ delay: 0.08 * i }}
                       className="flex flex-col items-center gap-2"
                     >
-                      <div className="animate-pixel-bounce" style={{ animationDelay: `${i * 0.3}s` }}>
-                        <PixelChef chef={chefId} size={6} />
+                      <div
+                        className="chef-avatar w-14 h-14 text-lg"
+                        style={{ backgroundColor: chef.color }}
+                      >
+                        {chef.letter}
                       </div>
-                      <span className="font-pixel text-[8px] text-text-dim uppercase">{chefId}</span>
+                      <span className="text-xs text-forest-light font-medium">{chef.name}</span>
                     </motion.div>
                   ))}
-                </div>
-
-                {/* Loading bar */}
-                <div className="mt-6 pt-4 border-t border-pixel-orange/10">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-pixel text-[8px] text-text-dim">LOADING...</span>
-                    <span className="font-pixel text-[8px] text-pixel-orange">87%</span>
-                  </div>
-                  <div className="h-2 bg-deep border border-pixel-orange/20">
-                    <motion.div
-                      className="h-full bg-pixel-orange"
-                      initial={{ width: '0%' }}
-                      whileInView={{ width: '87%' }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 2, delay: 0.5 }}
-                    />
-                  </div>
                 </div>
               </div>
             </motion.div>

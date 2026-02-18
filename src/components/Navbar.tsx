@@ -1,23 +1,15 @@
 import { useState, useEffect } from 'react'
-import {
-  Navbar as HeroNavbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenu,
-  NavbarMenuItem,
-  Link,
-} from '@heroui/react'
-import PixelLogo from './PixelLogo'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const [hasScrolled, setHasScrolled] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
+      setHasScrolled(currentScrollY > 10)
 
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false)
@@ -39,22 +31,21 @@ const Navbar = () => {
   ]
 
   return (
-    <HeroNavbar
-      isMenuOpen={isMenuOpen}
-      onMenuOpenChange={setIsMenuOpen}
-      className={`bg-deep/80 backdrop-blur-md fixed top-0 z-50 transition-all duration-300 border-b border-pixel-orange/10 ${
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        hasScrolled
+          ? 'bg-cream/90 backdrop-blur-md shadow-soft'
+          : 'bg-transparent'
+      } ${
         isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
       }`}
-      maxWidth="full"
-      height="5rem"
-      isBlurred={false}
     >
-      <div className="w-full max-w-7xl mx-auto flex items-center justify-between px-6 sm:px-10 lg:px-16">
-        <NavbarContent className="gap-4">
-          {/* Mobile menu toggle */}
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between h-20">
+        {/* Left: hamburger + brand */}
+        <div className="flex items-center gap-4">
           <button
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-            className="sm:hidden text-pixel-orange p-2 hover:bg-card/50 transition-colors"
+            className="sm:hidden text-forest p-2 hover:bg-cream-dark/50 rounded-lg transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
@@ -67,46 +58,58 @@ const Navbar = () => {
               </svg>
             )}
           </button>
-          <NavbarBrand>
-            <Link href="#" className="flex items-center">
-              <div className="sm:hidden">
-                <PixelLogo variant="compact" size={3} />
-              </div>
-              <div className="hidden sm:block">
-                <PixelLogo variant="full" size={4} />
-              </div>
-            </Link>
-          </NavbarBrand>
-        </NavbarContent>
+          <a href="#" className="flex items-center gap-2">
+            <span className="font-serif text-2xl text-forest tracking-tight">Chefriends</span>
+          </a>
+        </div>
 
-        <NavbarContent className="hidden sm:flex gap-1" justify="center">
+        {/* Center: nav links */}
+        <div className="hidden sm:flex items-center gap-1">
           {menuItems.map((item) => (
-            <NavbarItem key={item.href}>
-              <Link
-                href={item.href}
-                className="text-text-dim hover:text-pixel-orange transition-colors font-pixel text-[10px] px-4 py-2 tracking-wider hover:bg-card/50"
-              >
-                {item.label.toUpperCase()}
-              </Link>
-            </NavbarItem>
+            <a
+              key={item.href}
+              href={item.href}
+              className="text-forest-light hover:text-forest transition-colors text-sm font-medium px-4 py-2 rounded-pill hover:bg-cream-dark/60"
+            >
+              {item.label}
+            </a>
           ))}
-        </NavbarContent>
+        </div>
+
+        {/* Right: CTA */}
+        <div className="hidden sm:block">
+          <a
+            href="#coming-soon"
+            className="bg-forest text-cream px-5 py-2 rounded-pill text-sm font-semibold hover:bg-forest/90 transition-colors"
+          >
+            Join Waitlist
+          </a>
+        </div>
       </div>
 
-      <NavbarMenu className="pt-6 bg-deep/95 backdrop-blur-xl border-t border-pixel-orange/10">
-        {menuItems.map((item) => (
-          <NavbarMenuItem key={item.href}>
-            <Link
+      {/* Mobile menu */}
+      {isMenuOpen && (
+        <div className="sm:hidden bg-cream/95 backdrop-blur-xl border-t border-border px-6 pt-6 pb-8">
+          {menuItems.map((item) => (
+            <a
+              key={item.href}
               href={item.href}
-              className="w-full text-text-dim hover:text-pixel-orange font-pixel text-xs py-4 px-4 tracking-wider hover:bg-card/50 block"
-              onPress={() => setIsMenuOpen(false)}
+              className="block text-forest-light hover:text-forest text-base py-3 px-4 rounded-lg hover:bg-cream-dark/60 font-medium"
+              onClick={() => setIsMenuOpen(false)}
             >
-              {item.label.toUpperCase()}
-            </Link>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
-    </HeroNavbar>
+              {item.label}
+            </a>
+          ))}
+          <a
+            href="#coming-soon"
+            className="block bg-forest text-cream px-4 py-3 rounded-pill text-center text-sm font-semibold mt-4"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Join Waitlist
+          </a>
+        </div>
+      )}
+    </nav>
   )
 }
 

@@ -1,5 +1,4 @@
 import { Link } from '@heroui/react'
-import PixelLogo from './PixelLogo'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -10,40 +9,50 @@ const Footer = () => {
       { label: 'Meet the Chefs', href: '#meet-the-chefs' },
       { label: 'How It Works', href: '#how-it-works' },
     ],
-    Company: [
-      { label: 'About Us', href: '#' },
-      { label: 'Blog', href: '#' },
-      { label: 'Press', href: '#' },
+    Legal: [
+      { label: 'Privacy Policy', href: '/privacy' },
+      { label: 'Terms of Service', href: '/terms' },
     ],
     Support: [
-      { label: 'Help Center', href: '#' },
-      { label: 'Contact Us', href: '#' },
-    ],
-    Legal: [
-      { label: 'Terms of Service', href: '#' },
-      { label: 'Privacy Policy', href: '#' },
+      { label: 'Contact Us', href: 'mailto:hello@chefriendsapp.com' },
     ],
   }
 
   const socialLinks = [
-    { icon: 'X', href: '#', label: 'Twitter' },
-    { icon: 'IN', href: '#', label: 'LinkedIn' },
-    { icon: 'IG', href: '#', label: 'Instagram' },
-    { icon: 'FB', href: '#', label: 'Facebook' },
+    {
+      label: 'Instagram',
+      href: '#',
+      icon: (
+        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+      ),
+    },
+    {
+      label: 'X',
+      href: '#',
+      icon: (
+        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      ),
+    },
   ]
 
   return (
-    <footer className="bg-deep border-t border-pixel-orange/10">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
+    <footer className="bg-cream border-t border-border">
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 py-16">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           {/* Brand */}
           <div className="col-span-2">
-            <div className="mb-4">
-              <PixelLogo variant="full" size={3} />
-            </div>
-            <p className="text-text-dim mb-6 max-w-xs text-sm leading-relaxed">
-              Your AI chef friends, specialized in every cuisine. Free to chat, with optional live classes
-              from real professional chefs.
+            <Link href="#" className="inline-block mb-4">
+              <span className="font-serif text-2xl text-forest">Chefriends</span>
+            </Link>
+            <p className="text-forest-light mb-6 max-w-xs text-sm leading-relaxed">
+              Your AI chef friends, each specialized in a different cuisine. Scan ingredients, pick a
+              chef, and cook with confidence.
             </p>
             {/* Social links */}
             <div className="flex gap-3">
@@ -51,10 +60,10 @@ const Footer = () => {
                 <Link
                   key={social.label}
                   href={social.href}
-                  className="w-9 h-9 border border-pixel-orange/20 hover:border-pixel-orange/50 flex items-center justify-center text-text-dim hover:text-pixel-orange transition-colors"
+                  className="w-10 h-10 border border-border hover:border-forest/30 rounded-full flex items-center justify-center text-forest-muted hover:text-forest transition-colors"
                   aria-label={social.label}
                 >
-                  <span className="font-pixel text-[8px]">{social.icon}</span>
+                  {social.icon}
                 </Link>
               ))}
             </div>
@@ -63,13 +72,13 @@ const Footer = () => {
           {/* Links */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h4 className="font-pixel text-[10px] text-pixel-orange mb-4 tracking-wider">{category.toUpperCase()}</h4>
+              <h4 className="text-sm font-semibold text-forest mb-4">{category}</h4>
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-text-dim hover:text-text-bright transition-colors text-sm"
+                      className="text-forest-light hover:text-forest transition-colors text-sm"
                     >
                       {link.label}
                     </Link>
@@ -81,20 +90,10 @@ const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-pixel-orange/10 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-text-dim text-sm">
+        <div className="mt-12 pt-6 border-t border-border-light flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-forest-muted text-sm">
             &copy; {currentYear} Chefriends. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 text-text-dim text-sm">
-              <span className="font-pixel text-[8px] text-pixel-orange">EN</span>
-              <select className="bg-transparent border-none text-text-dim text-sm focus:outline-none cursor-pointer">
-                <option value="en">English</option>
-                <option value="es">Espanol</option>
-                <option value="ca">Catala</option>
-              </select>
-            </div>
-          </div>
         </div>
       </div>
     </footer>
