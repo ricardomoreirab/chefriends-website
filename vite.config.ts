@@ -8,6 +8,7 @@ function serveStaticHtml() {
   const routes: Record<string, string> = {
     '/privacy': 'public/privacy/index.html',
     '/terms': 'public/terms/index.html',
+    '/support': 'public/support/index.html',
   }
   return {
     name: 'serve-static-html',

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — Chefriends</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; color: #3C422E; background: #FFF8F0; line-height: 1.7; }
+    .container { max-width: 720px; margin: 0 auto; padding: 80px 24px 60px; }
+    .back { display: inline-flex; align-items: center; gap: 6px; color: #6B7259; text-decoration: none; font-size: 14px; margin-bottom: 32px; }
+    .back:hover { color: #3C422E; }
+    h1 { font-family: 'Playfair Display', Georgia, serif; font-size: 36px; color: #3C422E; margin-bottom: 8px; }
+    .subtitle { color: #6B7259; font-size: 15px; margin-bottom: 40px; }
+    h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; color: #3C422E; margin-top: 36px; margin-bottom: 16px; }
+    p, li { color: #6B7259; font-size: 15px; margin-bottom: 12px; }
+    a { color: #3C422E; }
+
+    details { border-bottom: 1px solid #E8DDD0; }
+    details:first-of-type { border-top: 1px solid #E8DDD0; }
+    summary {
+      padding: 16px 0;
+      font-weight: 500;
+      font-size: 15px;
+      color: #3C422E;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: '+';
+      font-size: 20px;
+      font-weight: 400;
+      color: #A3A78F;
+      transition: transform 0.2s;
+    }
+    details[open] summary::after {
+      content: '\2212';
+    }
+    details .answer {
+      padding: 0 0 16px;
+      color: #6B7259;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .contact-box {
+      background: #FFF4EC;
+      border: 1px solid #E8DDD0;
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 16px;
+    }
+    .contact-box p { margin-bottom: 8px; }
+    .contact-box p:last-child { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="lang-notice" style="display:none; background:#FFF4EC; border:1px solid #E8DDD0; border-radius:8px; padding:12px 16px; margin-bottom:24px; font-size:13px; color:#6B7259;"></div>
+    <script>
+      (function() {
+        var lang = localStorage.getItem('chefriends-lang');
+        var notice = document.getElementById('lang-notice');
+        if (lang === 'pt') { notice.textContent = 'Esta pagina esta disponivel apenas em ingles.'; notice.style.display = 'block'; }
+        else if (lang === 'es') { notice.textContent = 'Esta pagina solo esta disponible en ingles.'; notice.style.display = 'block'; }
+      })();
+    </script>
+    <a href="/" class="back">&larr; Back to Chefriends</a>
+    <h1>Support</h1>
+    <p class="subtitle">Find answers to common questions or get in touch with us.</p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <details>
+      <summary>What is Chefriends?</summary>
+      <div class="answer">Chefriends is a cooking app powered by AI. It features 8 AI chef friends, each specialized in a different cuisine (Italian, Japanese, Mexican, Indian, French, Thai, Brazilian, and Spanish). You add your available ingredients, pick a chef, and get personalized recipes with step-by-step cooking guidance.</div>
+    </details>
+
+    <details>
+      <summary>How does ingredient scanning work?</summary>
+      <div class="answer">Simply take a photo of your fridge, pantry, or individual ingredients using your phone's camera. Our AI instantly identifies the items and adds them to your ingredient list. You can also upload a photo from your gallery or type ingredients manually.</div>
+    </details>
+
+    <details>
+      <summary>Can I scan a dish instead of ingredients?</summary>
+      <div class="answer">Yes! You can snap a photo of a dish you'd like to recreate, or type the name of a dish. Chefriends will recognize the dish and generate a recipe for it, adapted by your chosen chef's culinary style.</div>
+    </details>
+
+    <details>
+      <summary>What are the AI chefs?</summary>
+      <div class="answer">The 8 AI chefs are virtual cooking companions, each an expert in a specific cuisine. They have their own personality, cooking style, and signature tips. Choose the chef that matches your craving, and they'll guide you through the entire cooking process with authentic techniques and personal advice.</div>
+    </details>
+
+    <details>
+      <summary>How do timers and mise en place work?</summary>
+      <div class="answer">Each recipe step includes built-in timers you can start with a tap, so you never overcook or undercook. The mise en place checklist at the beginning helps you prepare and measure all ingredients before you start cooking, just like a professional kitchen.</div>
+    </details>
+
+    <details>
+      <summary>Does Chefriends support drinks?</summary>
+      <div class="answer">Yes! Switch to drinks mode and your chef friends will suggest cocktail and mocktail recipes — with or without alcohol. The same step-by-step guidance applies to mixing drinks.</div>
+    </details>
+
+    <details>
+      <summary>How do I save favorite recipes?</summary>
+      <div class="answer">Tap the heart icon on any recipe to save it to your favorites. You can access all your saved recipes anytime from your profile. Your favorites sync across your account.</div>
+    </details>
+
+    <details>
+      <summary>What is Quick Decide?</summary>
+      <div class="answer">Quick Decide is a feature for when you can't choose what to cook. It picks a recipe for you based on your available ingredients and preferences, so you can skip the decision-making and start cooking right away.</div>
+    </details>
+
+    <details>
+      <summary>Can I customize recipes for my diet?</summary>
+      <div class="answer">Absolutely. In your profile, you can set dietary preferences (vegetarian, vegan, gluten-free, etc.), cooking time limits, available kitchen appliances, and ingredient dislikes. Every recipe suggestion is tailored to your settings.</div>
+    </details>
+
+    <details>
+      <summary>How do Smart Shopping Lists work?</summary>
+      <div class="answer">When a recipe requires ingredients you don't have, they're automatically added to a smart shopping list. The list is organized by store section (produce, dairy, etc.) with precise quantities, so you can take it straight to the store.</div>
+    </details>
+
+    <details>
+      <summary>Is Chefriends free?</summary>
+      <div class="answer">Chefriends is free to download and use. The app is supported by ads displayed via Google AdMob. We may introduce optional premium features in the future.</div>
+    </details>
+
+    <details>
+      <summary>What platforms is Chefriends available on?</summary>
+      <div class="answer">Chefriends is launching first on iOS. Android support is planned for a future release. Join the waitlist to be notified when the app becomes available.</div>
+    </details>
+
+    <details>
+      <summary>How do I delete my account or data?</summary>
+      <div class="answer">You can request account and data deletion by emailing us at <a href="mailto:hello@chefriendsapp.com">hello@chefriendsapp.com</a> with the subject line "Data Deletion Request". We will process your request within 30 days. For more details, see our <a href="/privacy">Privacy Policy</a>.</div>
+    </details>
+
+    <h2>Contact Us</h2>
+    <div class="contact-box">
+      <p>Can't find what you're looking for? We're happy to help.</p>
+      <p>Email us at <a href="mailto:hello@chefriendsapp.com">hello@chefriendsapp.com</a></p>
+      <p style="color: #A3A78F; font-size: 13px;">We typically respond within 48 hours.</p>
+    </div>
+  </div>
+</body>
+</html>

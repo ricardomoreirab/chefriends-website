@@ -3,8 +3,12 @@ import { useI18n } from '../i18n'
 
 import pepeImg from '../assets/chefs/pepe.png'
 import yukiImg from '../assets/chefs/yuki.png'
-import jacquesImg from '../assets/chefs/jacques.png'
 import carlosImg from '../assets/chefs/carlos.png'
+import priyaImg from '../assets/chefs/priya.png'
+import jacquesImg from '../assets/chefs/jacques.png'
+import somchaiImg from '../assets/chefs/somchai.png'
+import renataImg from '../assets/chefs/renata.png'
+import joanImg from '../assets/chefs/joan.png'
 
 const PhoneFrame = ({ children }: { children: React.ReactNode }) => (
   <div className="relative w-[280px] sm:w-[300px] mx-auto">
@@ -54,29 +58,45 @@ const ChefSelectMockup = ({ t }: { t: (key: string) => string }) => (
       <p className="text-[9px] text-forest-light">{t('appShowcase.phone.pickChef')}</p>
     </div>
     <div className="h-px bg-border" />
-    <div className="px-3 py-3 grid grid-cols-2 gap-2">
+    <div className="flex justify-center py-3">
+      <div className="flex items-center gap-1.5 bg-accent/80 px-4 py-1.5 rounded-pill shadow-soft">
+        <svg className="w-3 h-3 text-forest" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M3 4l17 17"/></svg>
+        <span className="text-[9px] font-semibold text-forest">Surprise Me</span>
+      </div>
+    </div>
+    <div className="px-3 pb-3 grid grid-cols-4 gap-x-1 gap-y-2">
       {[
-        { img: pepeImg, name: 'Pepe', specialty: t('appShowcase.phone.italianHome'), color: '#E85D2C', selected: true },
-        { img: yukiImg, name: 'Yuki', specialty: t('appShowcase.phone.japaneseHome'), color: '#D94040', selected: false },
-        { img: jacquesImg, name: 'Jacques', specialty: t('appShowcase.phone.frenchHome'), color: '#4A86C8', selected: false },
-        { img: carlosImg, name: 'Carlos', specialty: t('appShowcase.phone.mexicanHome'), color: '#D4A017', selected: false },
+        { img: pepeImg, name: 'Pepe', cuisine: t('meetTheChefs.cuisine.italian'), color: '#E85D2C', selected: true, fav: true },
+        { img: yukiImg, name: 'Yuki', cuisine: t('meetTheChefs.cuisine.japanese'), color: '#D94040', selected: false, fav: false },
+        { img: carlosImg, name: 'Carlos', cuisine: t('meetTheChefs.cuisine.mexican'), color: '#D4A017', selected: false, fav: false },
+        { img: priyaImg, name: 'Priya', cuisine: t('meetTheChefs.cuisine.indian'), color: '#E85D2C', selected: false, fav: true },
+        { img: jacquesImg, name: 'Jacques', cuisine: t('meetTheChefs.cuisine.french'), color: '#4A86C8', selected: false, fav: false },
+        { img: somchaiImg, name: 'Somchai', cuisine: t('meetTheChefs.cuisine.thai'), color: '#8B6FC0', selected: false, fav: false },
+        { img: renataImg, name: 'Renata', cuisine: t('meetTheChefs.cuisine.brazilian'), color: '#6FA030', selected: false, fav: false },
+        { img: joanImg, name: 'Joan', cuisine: t('meetTheChefs.cuisine.spanish'), color: '#C84A20', selected: false, fav: false },
       ].map((chef) => (
-        <div
-          key={chef.name}
-          className={`bg-card-white rounded-[16px] overflow-hidden text-center relative ${
-            chef.selected ? 'border-2 shadow-medium' : 'border border-border'
-          }`}
-          style={chef.selected ? { borderColor: chef.color } : {}}
-        >
-          <svg className="absolute top-1.5 right-1.5 w-3.5 h-3.5 text-forest-muted/30 z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          <div className="aspect-[0.9/1] flex items-end justify-center px-0.5 pt-1">
-            <img src={chef.img} alt={chef.name} className="w-full h-full object-contain" />
+        <div key={chef.name} className="flex flex-col items-center">
+          <div className="relative">
+            <div
+              className="w-[52px] h-[52px] rounded-full border-[2.5px] flex items-center justify-center bg-card-white shadow-soft"
+              style={{ borderColor: chef.selected ? chef.color : 'transparent' }}
+            >
+              <div className="w-[44px] h-[44px] rounded-full overflow-hidden" style={{ backgroundColor: `${chef.color}10` }}>
+                <img src={chef.img} alt={chef.name} className="w-full h-[66px] object-cover" />
+              </div>
+            </div>
+            <div
+              className="absolute -top-0.5 -right-0.5 w-[16px] h-[16px] rounded-full flex items-center justify-center border"
+              style={{
+                backgroundColor: chef.fav ? '#D94040' : '#fff',
+                borderColor: chef.fav ? '#D94040' : '#e5e5e5',
+              }}
+            >
+              <svg className="w-[8px] h-[8px]" viewBox="0 0 24 24" fill={chef.fav ? '#fff' : 'none'} stroke={chef.fav ? '#fff' : '#bbb'} strokeWidth="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
           </div>
-          <div className="py-1.5 px-1">
-            <p className="text-[11px] font-serif text-forest">{chef.name}</p>
-            <p className="text-[8px] font-medium" style={{ color: chef.color }}>{chef.specialty}</p>
-          </div>
-          {chef.selected && <div className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ backgroundColor: chef.color }} />}
+          <p className={`text-[9px] mt-1 font-serif ${chef.selected ? '' : 'text-forest'}`} style={chef.selected ? { color: chef.color } : {}}>{chef.name}</p>
+          <p className="text-[7px] font-medium" style={{ color: chef.color }}>{chef.cuisine}</p>
         </div>
       ))}
     </div>

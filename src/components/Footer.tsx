@@ -16,6 +16,7 @@ const Footer = () => {
       { label: t('footer.terms'), href: '/terms' },
     ],
     [t('footer.support')]: [
+      { label: t('footer.supportPage'), href: '/support' },
       { label: t('footer.contact'), href: 'mailto:hello@chefriendsapp.com' },
     ],
   }
